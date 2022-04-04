@@ -58,12 +58,17 @@ class MyAppState extends State<MyApp> {
             ),
             body: SfDateRangePicker(
               headerHeight: 100,
+              monthViewSettings: DateRangePickerMonthViewSettings(
+                  dayFormat: 'EEE', enableSwipeSelection: true),
               headerStyle: DateRangePickerHeaderStyle(
                   textStyle: TextStyle(
-                      color: Colors.red,
+                      color: Colors.black,
                       fontSize: 20,
                       fontWeight: FontWeight.w500)),
               onSelectionChanged: _onSelectionChanged,
+              rangeSelectionColor: Colors.brown.withOpacity(.3),
+              startRangeSelectionColor: Colors.brown,
+              endRangeSelectionColor: Colors.brown,
               selectionShape: DateRangePickerSelectionShape.rectangle,
               selectionMode: DateRangePickerSelectionMode.range,
               initialSelectedRange: PickerDateRange(

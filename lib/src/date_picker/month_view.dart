@@ -3977,7 +3977,9 @@ void _drawStartRangeFillSelection(Canvas canvas, double x, double y,
           Rect.fromLTRB(
               x + padding, y + padding, x + width, y + height - padding),
           bottomLeft: Radius.circular(cornerRadius),
-          topLeft: Radius.circular(cornerRadius)),
+          topLeft: Radius.circular(cornerRadius),
+          bottomRight: Radius.circular(cornerRadius),
+          topRight: Radius.circular(cornerRadius)),
       selectionPainter);
 }
 
@@ -3990,7 +3992,9 @@ void _drawEndRangeFillSelection(Canvas canvas, double x, double y, double width,
           Rect.fromLTRB(
               x, y + padding, x + width - padding, y + height - padding),
           bottomRight: Radius.circular(cornerRadius),
-          topRight: Radius.circular(cornerRadius)),
+          topRight: Radius.circular(cornerRadius),
+          bottomLeft: Radius.circular(cornerRadius),
+          topLeft: Radius.circular(cornerRadius)),
       selectionPainter);
 }
 
