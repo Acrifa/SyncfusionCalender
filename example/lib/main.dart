@@ -14,41 +14,6 @@ class MyApp extends StatefulWidget {
 
 /// State for MyApp
 class MyAppState extends State<MyApp> {
-  String _selectedDate = '';
-  String _dateCount = '';
-  String _range = '';
-  String _rangeCount = '';
-
-  /// The method for [DateRangePickerSelectionChanged] callback, which will be
-  /// called whenever a selection changed on the date picker widget.
-  void _onSelectionChanged(DateRangePickerSelectionChangedArgs args) {
-    /// The argument value will return the changed date as [DateTime] when the
-    /// widget [SfDateRangeSelectionMode] set as single.
-    ///
-    /// The argument value will return the changed dates as [List<DateTime>]
-    /// when the widget [SfDateRangeSelectionMode] set as multiple.
-    ///
-    /// The argument value will return the changed range as [PickerDateRange]
-    /// when the widget [SfDateRangeSelectionMode] set as range.
-    ///
-    /// The argument value will return the changed ranges as
-    /// [List<PickerDateRange] when the widget [SfDateRangeSelectionMode] set as
-    /// multi range.
-    setState(() {
-      if (args.value is PickerDateRange) {
-        _range = '${DateFormat('dd/MM/yyyy').format(args.value.startDate)} -'
-            // ignore: lines_longer_than_80_chars
-            ' ${DateFormat('dd/MM/yyyy').format(args.value.endDate ?? args.value.startDate)}';
-      } else if (args.value is DateTime) {
-        _selectedDate = args.value.toString();
-      } else if (args.value is List<DateTime>) {
-        _dateCount = args.value.length.toString();
-      } else {
-        _rangeCount = args.value.length.toString();
-      }
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -56,24 +21,36 @@ class MyAppState extends State<MyApp> {
             appBar: AppBar(
               title: const Text('DatePicker demo'),
             ),
-            body: SfDateRangePicker(
-              headerHeight: 100,
-              monthViewSettings: DateRangePickerMonthViewSettings(
-                  dayFormat: 'EEE', enableSwipeSelection: true),
-              headerStyle: DateRangePickerHeaderStyle(
-                  textStyle: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500)),
-              onSelectionChanged: _onSelectionChanged,
-              rangeSelectionColor: Colors.brown.withOpacity(.3),
-              startRangeSelectionColor: Colors.brown,
-              endRangeSelectionColor: Colors.brown,
-              selectionShape: DateRangePickerSelectionShape.rectangle,
-              selectionMode: DateRangePickerSelectionMode.range,
-              initialSelectedRange: PickerDateRange(
-                  DateTime.now().subtract(const Duration(days: 4)),
-                  DateTime.now().add(const Duration(days: 3))),
+            body: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SfDateRangePicker(
+                  headerHeight: 100,
+                  enablePastDates: false,
+                  todayHighlightColor: Colors.black,
+                  showTodayButton: false,
+                  monthViewSettings: DateRangePickerMonthViewSettings(
+                      dayFormat: 'EEE',
+                      enableSwipeSelection: true,
+                      viewHeaderStyle: DateRangePickerViewHeaderStyle(
+                        textStyle: TextStyle(
+                            color: Colors.black, fontWeight: FontWeight.w500),
+                      )),
+                  headerStyle: DateRangePickerHeaderStyle(
+                      textStyle: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                          fontWeight: FontWeight.w500)),
+                  onSelectionChanged:
+                      (DateRangePickerSelectionChangedArgs d) {},
+                  rangeSelectionColor: Colors.brown.withOpacity(.3),
+                  startRangeSelectionColor: Colors.brown,
+                  endRangeSelectionColor: Colors.brown,
+                  selectionShape: DateRangePickerSelectionShape.rectangle,
+                  selectionMode: DateRangePickerSelectionMode.range,
+                ),
+              ],
             )));
   }
 }
