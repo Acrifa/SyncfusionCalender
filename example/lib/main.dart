@@ -29,7 +29,6 @@ class MyAppState extends State<MyApp> {
                   headerHeight: 100,
                   enablePastDates: false,
                   todayHighlightColor: Colors.black,
-                  showTodayButton: false,
                   monthViewSettings: DateRangePickerMonthViewSettings(
                       dayFormat: 'EEE',
                       enableSwipeSelection: true,

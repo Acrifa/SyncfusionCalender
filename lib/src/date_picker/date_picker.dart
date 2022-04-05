@@ -56,7 +56,7 @@ class SfDateRangePicker extends StatelessWidget {
       DateRangePickerView view = DateRangePickerView.month,
       this.selectionMode = DateRangePickerSelectionMode.single,
       this.headerHeight = 40,
-      this.calenderHeight = 400,
+      this.calenderHeight = 450,
       this.todayHighlightColor,
       this.backgroundColor,
       DateTime? initialSelectedDate,
@@ -3141,11 +3141,10 @@ class _PickerHeaderViewState extends State<_PickerHeaderView> {
     double arrowSize = widget.height * 0.5;
     arrowSize = arrowSize > 25 ? 25 : arrowSize;
     arrowSize = arrowSize * widget.textScaleFactor;
-    final GestureDetector leftArrow =
-        showNavigationArrow ? _getArrow() : GestureDetector();
+    final Material leftArrow = showNavigationArrow ? _getArrow() : Material();
 
-    final GestureDetector rightArrow =
-        showNavigationArrow ? _getArrow(isRight: true) : GestureDetector();
+    final Material rightArrow =
+        showNavigationArrow ? _getArrow(isRight: true) : Material();
 
     if (widget.headerStyle.textAlign == TextAlign.left ||
         widget.headerStyle.textAlign == TextAlign.start) {
@@ -3264,20 +3263,23 @@ class _PickerHeaderViewState extends State<_PickerHeaderView> {
         )));
   }
 
-  GestureDetector _getArrow({bool? isRight = false}) {
-    return GestureDetector(
-      onTap: isRight!
-          ? widget.nextNavigationCallback
-          : widget.previousNavigationCallback,
-      child: Container(
-          padding: const EdgeInsets.all(7),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Color(0xffEFEFEF))),
-          child: Icon(
-            isRight ? Icons.chevron_right : Icons.chevron_left,
-            color: Colors.black,
-          )),
+  Material _getArrow({bool? isRight = false}) {
+    return Material(
+      child: InkWell(
+        splashColor: Colors.transparent,
+        onTap: isRight!
+            ? widget.nextNavigationCallback
+            : widget.previousNavigationCallback,
+        child: Container(
+            padding: const EdgeInsets.all(7),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Color(0xffEFEFEF))),
+            child: Icon(
+              isRight ? Icons.chevron_right : Icons.chevron_left,
+              color: Colors.black,
+            )),
+      ),
     );
   }
 
